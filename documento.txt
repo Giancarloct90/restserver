@@ -1,0 +1,5 @@
+16.06.19
+en esta seccion estamos creando un servicio Rest, un restserver empezamos a configurar nuestra aplicacion
+empezamos a crear nuestra app, creamos nuestra peticiones, que a su vez son middleware que se encargar de manejar cada una
+de la peticiones que entrar al servidor, como por ejemplo el app.get('/usuario) y en el callback estamos haciendo lo que 
+queremos que haga
