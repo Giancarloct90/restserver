@@ -3,3 +3,18 @@ en esta seccion estamos creando un servicio Rest, un restserver empezamos a conf
 empezamos a crear nuestra app, creamos nuestra peticiones, que a su vez son middleware que se encargar de manejar cada una
 de la peticiones que entrar al servidor, como por ejemplo el app.get('/usuario) y en el callback estamos haciendo lo que 
 queremos que haga
+
+17.06.19
+www.draw.io // para hacer esquemas de bd, y otros dibujos
+empezaremos a usar mongoose, lo instalamos de la siguiente manera
+    npm install mongoose --save
+
+ordenamos la ruta de usuario
+    dentro de la carpeta server, creamos una carpta que se llama routes, y a su vez dentro de esta carpeta creamo un archivo routes.js
+    copiamos todos lo middleware parta usuario que habiamos creado, reuieramos la libreria express
+    al final de la pagina exportamos el module de la app 
+en el archvio server hacemos el require del archivo de routes.js de la siguiente manera
+    app.use( require('./routes/usuario.js') );
+creamos el modelo de usuario y lo creamos de la siguiente manera, en la carpeta server creamos una carperta que se llame modeles,
+dentro de esta carpeta creamos el modelo, creamos un archivo usuario.js, en este archivo recide el modelo de usario que basicamente
+lleva la informacion de la tabla usuario 

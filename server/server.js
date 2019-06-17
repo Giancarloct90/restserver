@@ -1,7 +1,10 @@
 require('./config/config');
 const express = require('express')
+// hacemos el require de mongoose para poder empezarlo a usar
+const mongoose = require('mongoose');
 const app = express()
 const bodyParser = require('body-parser');
+
 
 
 // parser application/x-www-form-urlencoded
@@ -12,43 +15,21 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(bodyParser.json());
 
+// para poder usar los middleware de usuario tenemos que importar o requerir el archivo route.js
+// de esta manera podemos usar los middleware de creamos en el archivo routes.js
+app.use(require('./routes/usuario.js'));
 
-// estos son los midleware que estamos usando para que maneje nuestra apliacion
-// las peticiones que manjean nuestra app
-app.get('/usuario', function (req, res) {
-    res.json('get usuario')
-})
-
-app.post('/usuario', function (req, res) {
-    //esta es la variable body que es resultado del bodyparser
-    // con este bodyparser lo que obtenemos son los valores del form de donde nos esten mandando la peticion
-    //  ejemplo mandan una peticion con un form lleno de datos con el body parser estamo obteniendo esos datos de ese form
-    // y lo estamos almacenando en la varible body en forma de json y asi obtenemos la datos que vienen del form de esa pagina
-    let body = req.body;
-    if (body.nombre === undefined) {
-        res.status(400).json({
-            ok: false,
-            mensaje: `el nombre es necesario`
-        });
+// con este comando estamos conectandonos a mongodb, usando la libreria o paquete previmente desarollado mongoose
+// recibe dos parametro, un string con de donde se encuentra el servidor de db con su puerto y nombre de base de datos
+// y un callback para saber si se ejecuto bien o no, que recibe dos parametros, uno es para manejar el error
+// el otro es para manejar la respuesta
+mongoose.connect('mongodb://localhost:27017/cafe', (err, res) => {
+    if (err) {
+        throw err;
     } else {
-        res.json({
-            body
-        });
+        console.log("DataBase Online");
     }
-})
-
-
-app.put('/usuario/:id', function (req, res) {
-    let id = req.params.id;
-    res.json({
-        id
-    })
-})
-
-
-app.delete('/usuario', function (req, res) {
-    res.json('delete usuario')
-})
+});
 
 // aqui estamos utilizando la var que creamos en config.js
 app.listen(process.env.PORT, () => {
