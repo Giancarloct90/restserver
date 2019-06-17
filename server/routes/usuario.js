@@ -30,6 +30,7 @@ app.post('/usuario', function (req, res) {
     // err es para verificar si hay un error y usuarioDB nos sirve para poder ver el usuarioDB que se acaba de guardar. 
     usuario.save((err, usuarioDB) => {
         if (err) {
+
             return res.status(400).json({
                 ok: false,
                 err
