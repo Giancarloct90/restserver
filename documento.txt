@@ -18,3 +18,8 @@ en el archvio server hacemos el require del archivo de routes.js de la siguiente
 creamos el modelo de usuario y lo creamos de la siguiente manera, en la carpeta server creamos una carperta que se llame modeles,
 dentro de esta carpeta creamos el modelo, creamos un archivo usuario.js, en este archivo recide el modelo de usario que basicamente
 lleva la informacion de la tabla usuario 
+
+empezamos a insertar en la db, lo hicimos en base al modelo de usario que previamente creamos
+
+empezaremos a usar bcrypt para encriptar nuestras contrasenias 
+usaremos un metodo hash de una sola via 

@@ -1,6 +1,8 @@
 const express = require('express');
 const app = express();
 
+const bcrypt = require('bcrypt');
+
 // aqui estamos haciendo el require del modelo usuario para poder usar el usario que esportamos en este archivo que aqui indicamos
 // por convencion de sintaxis ponemos la primera letra en mayuscula para indicar que instanciaremos objetos a partir de esta variable
 const Usuario = require('../models/usuario');
@@ -31,6 +33,10 @@ app.post('/usuario', function (req, res) {
     usuario.save((err, usuarioDB) => {
         if (err) {
 
+            //con este return lo que estamos haciendo es que le estamos enviando uns respuesta luego de que ingreso una peticion
+            // dicha respuesta, consta de la ejecucion de la funcion status, esta funcion recibe un parametro entero, es un codigo
+            // ya existe una lista de codigo, el numero varia dependiendo de lo que querramos decir, ejemplo el numero 200, quiere decir que todo salio bien
+            // el 400 que hubo un problema, la numeracion es un standard que se usa
             return res.status(400).json({
                 ok: false,
                 err
