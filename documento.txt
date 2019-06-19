@@ -23,3 +23,9 @@ empezamos a insertar en la db, lo hicimos en base al modelo de usario que previa
 
 empezaremos a usar bcrypt para encriptar nuestras contrasenias 
 usaremos un metodo hash de una sola via 
+
+18.06.19
+empezamos a ecncriptar la contrasenia, ya que no es recomendable guardarla en texto plano
+la estamos encriptando con el bcrypt, un metodo hash de una sola via, aunque alguien obtenga todo la cadena de caracteres no podra reconstruirla a la version anterior, o a su forma original
+
+u obtener la clave

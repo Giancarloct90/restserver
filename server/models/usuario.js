@@ -53,6 +53,17 @@ let usuarioSchema = new Schema({
     }
 });
 
+// nosotros lo que estamos haciendo es un app restserver que el objetivo es enviar datos, la gente podra comsumir mi restserver
+// como nosotro estamos enviando datos, de esta manera estas diciendo es que vamos a imprimir, con el metodo toJSON en un esquema siempre se llama cuando se intenta imprimir
+// aqui lo que estamos haciendo es tratando de quitar el password en la impresion o envio de informacion para que la gente externa a nuestra app no se sepa que existe una pass
+usuarioSchema.methods.toJSON = function () {
+    let user = this;
+    let userObject = user.toObject();
+    delete userObject.password;
+
+    return userObject;
+}
+
 // en la parte de abajo definimos que nuestro esquema use un plugin, en este caso usara el plugin, de mongoose validator,
 // para poder decirle a nodej que nuestro esquema use un plugin, es corriendo esta funcion .plugin, esta funcion recibe dos parametro
 // una es el plugin en este caso el uniqueValidator que es una constante que inicializamos con el require de mongooseuniquevalidator

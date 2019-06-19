@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 
+//aqui lo que estamos haciendo es mandar a llamar el paquete para poderlo usar
 const bcrypt = require('bcrypt');
 
 // aqui estamos haciendo el require del modelo usuario para poder usar el usario que esportamos en este archivo que aqui indicamos
@@ -24,7 +25,9 @@ app.post('/usuario', function (req, res) {
     let usuario = new Usuario({
         nombre: body.nombre,
         email: body.email,
-        password: body.password,
+        // hashsync sirve para que haga un de una manera sincrona, que no use un callbackk o promesa o nada de eso
+        // que lo haga directamente, el segundo parametro es el numero de vueltas que se le aplicara al has, con un 10 bastara
+        password: bcrypt.hashSync(body.password, 10),
         role: body.role
     });
 
@@ -43,6 +46,7 @@ app.post('/usuario', function (req, res) {
             });
 
         }
+        //usuarioDB.password = null;
         res.json({
             ok: true,
             usuario: usuarioDB
