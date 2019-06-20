@@ -23,7 +23,7 @@ app.get('/usuario', function (req, res) {
     // la funcion skip recibe un paramtro entero y quiero decir desde el registro x trae informacion
     // la funcion limit tambien recibe un entero como parametro, y es el limite hasta donde deberia de llegar
     // exec es para que se ejecute y recibe un callback, con un erro o un objeto lleno de objetos que ese encuantran en lad db
-    Usuario.find({}, 'nombre email role estado google img').skip(desde).limit(limite).exec((err, usuarios)=>{
+    Usuario.find({estado: true}, 'nombre email role estado google img').skip(desde).limit(limite).exec((err, usuarios)=>{
         if(err){
             return res.status(400).json({
                 ok: false,
@@ -31,7 +31,7 @@ app.get('/usuario', function (req, res) {
             });
         }
         // ejecutando la funcion count recibimos cuantas registros hay en nuestra coleccion
-        Usuario.count({}, (err, conteo)=>{
+        Usuario.count({estado: true}, (err, conteo)=>{
             res.json({
                 ok:true,
                 usuarios,
@@ -123,19 +123,43 @@ app.put('/usuario/:id', function (req, res) {
     })
 })
 
-app.delete('/usuario/:id', function (req, res) {
-    //res.json('delete usuario')
+// // con el siguiente middleware para poder borrar un registro de nuestra coleccion
+// // para esto utilizamos la funcion findByIdAndRemove
+// app.delete('/usuario/:id', function (req, res) {
+//     //res.json('delete usuario')
+//     //con este comando estamos obteniendo el id que viene el url
+//     let id = req.params.id;
+//     // la funcion findByIdAndRemove recibe en este caso dos parametros el id y un callback
+//     // donde manejamos el error o el objeto borrado
+//     Usuario.findByIdAndRemove(id,(err, usuarioBorrado)=>{
+//         if(err){
+//             return res.status(400).json({
+//                ok: false,
+//                err 
+//             });
+//         }
+//         if(usuarioBorrado === null){
+//             return res.status(400).json({
+//                 ok: true,
+//                 err: {
+//                     message: "el usuario no existe"
+//                 }
+//             });
+//         }
+//         res.json({
+//             ok:true,
+//             usuarioBorrado
+//         });
+//     });
+// })
+
+app.delete('/usuario/:id',(req, res)=>{
     let id = req.params.id;
-    Usuario.findByIdAndRemove(id,(err, usuarioBorrado)=>{
+    
+    Usuario.findByIdAndUpdate(id,{estado: false},(err, usuarioBorrado)=>{
         if(err){
             return res.status(400).json({
-               ok: false,
-               err 
-            });
-        }
-        if(usuarioBorrado === null){
-            return res.status(400).json({
-                ok: true,
+                ok:false,
                 err
             });
         }
@@ -143,7 +167,8 @@ app.delete('/usuario/:id', function (req, res) {
             ok:true,
             usuarioBorrado
         });
-    });
-})
+    });    
+});
+
 
 module.exports = app;
