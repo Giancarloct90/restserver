@@ -4,6 +4,8 @@ const app = express();
 //aqui lo que estamos haciendo es mandar a llamar el paquete para poderlo usar
 const bcrypt = require('bcrypt');
 
+const _ = require('underscore')
+
 // aqui estamos haciendo el require del modelo usuario para poder usar el usario que esportamos en este archivo que aqui indicamos
 // por convencion de sintaxis ponemos la primera letra en mayuscula para indicar que instanciaremos objetos a partir de esta variable
 const Usuario = require('../models/usuario');
@@ -65,10 +67,31 @@ app.post('/usuario', function (req, res) {
     // }
 })
 
+// es una actulizacion de registro, obtendremo el id de un registro y si existe lo actualizamos
 app.put('/usuario/:id', function (req, res) {
+    // de esta manera obtenemos el id que viene en el link 
     let id = req.params.id;
-    res.json({
-        id
+    // con este comando obtenemos todo el form que nos envian
+    let body = _.pick(req.body, ['nombre', 'email', 'img', 'role', 'estado']);
+    // usamos un metodo de nuestro modelo previamnete creado, que se llama findOneAndUpdate, que recibe 4 parametros en este caso
+    // el primer parametro es el id, que lo va a buscar en la base de datos y si existe vaa seguir con la modificacion,
+    // el segundo parametro es el body es los nuevos datos que recibimos del frontend, el tercer parametro son unas opciones de la funcion findOneAndUpdate, 
+    // en el tercer parametro nosotros les estamos enviando un objeto con la propiedad new igual a true, esto nos sirve para que nos regrese el nuesvo objeto que modifico
+    //el 4to parametro es un callback que recibe dos parametros, el error en caso de ue suceda un error y el objeto modificado si lo modifico.
+    Usuario.findOneAndUpdate(id, body, {
+        new: true,
+        runValidators: true
+    }, (err, usuarioDB) => {
+        if (err) {
+            return res.status(400).json({
+                ok: false,
+
+            });
+        }
+        res.json({
+            ok: true,
+            usuarioDB
+        });
     })
 })
 
