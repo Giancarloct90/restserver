@@ -23,17 +23,21 @@ app.get('/usuario', function (req, res) {
     // la funcion skip recibe un paramtro entero y quiero decir desde el registro x trae informacion
     // la funcion limit tambien recibe un entero como parametro, y es el limite hasta donde deberia de llegar
     // exec es para que se ejecute y recibe un callback, con un erro o un objeto lleno de objetos que ese encuantran en lad db
-    Usuario.find({estado: true}, 'nombre email role estado google img').skip(desde).limit(limite).exec((err, usuarios)=>{
-        if(err){
+    Usuario.find({
+        estado: true
+    }, 'nombre email role estado google img').skip(desde).limit(limite).exec((err, usuarios) => {
+        if (err) {
             return res.status(400).json({
                 ok: false,
                 err
             });
         }
-        // ejecutando la funcion count recibimos cuantas registros hay en nuestra coleccion
-        Usuario.count({estado: true}, (err, conteo)=>{
+        // ejecutando la funcion countDocuments recibimos cuantas registros hay en nuestra coleccion
+        Usuario.countDocuments({
+            estado: true
+        }, (err, conteo) => {
             res.json({
-                ok:true,
+                ok: true,
                 usuarios,
                 cuantos: conteo
             });
@@ -153,21 +157,23 @@ app.put('/usuario/:id', function (req, res) {
 //     });
 // })
 
-app.delete('/usuario/:id',(req, res)=>{
+app.delete('/usuario/:id', (req, res) => {
     let id = req.params.id;
-    
-    Usuario.findByIdAndUpdate(id,{estado: false},(err, usuarioBorrado)=>{
-        if(err){
+
+    Usuario.findByIdAndUpdate(id, {
+        estado: false
+    }, (err, usuarioBorrado) => {
+        if (err) {
             return res.status(400).json({
-                ok:false,
+                ok: false,
                 err
             });
         }
         res.json({
-            ok:true,
+            ok: true,
             usuarioBorrado
         });
-    });    
+    });
 });
 
 

@@ -1,3 +1,18 @@
+
+heroku account
+    giancarlodp74@gmail.com
+    Jesucristo1990$
+
+Mongodb Atlas
+    giancarlodp74
+    Jesucristo1990
+    Giancarlo
+    Carcamo
+    mongo Atlas:
+        root
+        4Yodvwi4CvXSTktP
+        mongodb+srv://root:4Yodvwi4CvXSTktP@cluster0-8pm3c.mongodb.net/cafe
+
 16.06.19
 en esta seccion estamos creando un servicio Rest, un restserver empezamos a configurar nuestra aplicacion
 empezamos a crear nuestra app, creamos nuestra peticiones, que a su vez son middleware que se encargar de manejar cada una
@@ -29,3 +44,10 @@ empezamos a ecncriptar la contrasenia, ya que no es recomendable guardarla en te
 la estamos encriptando con el bcrypt, un metodo hash de una sola via, aunque alguien obtenga todo la cadena de caracteres no podra reconstruirla a la version anterior, o a su forma original
 
 u obtener la clave
+
+22.06.19
+empezamos a usar mongodb atlas, creamos una cuenta y creamos un cluster gratis con capacidad de almacenamiento de 500mb
+empezamos a usar mongodb compass para poder conectarnos a mongodb atlas
+lo abrimos y nos conectamos localmente solo poniendo el comando localhost,
+luego nos conectamos al servidor de mlab, usuamos su url y username and password que habia ahi,
+con el npm update, se actulizan todos lo paquetes de npm hasta la ultima version.

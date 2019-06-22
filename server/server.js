@@ -23,7 +23,10 @@ app.use(require('./routes/usuario.js'));
 // recibe dos parametro, un string con de donde se encuentra el servidor de db con su puerto y nombre de base de datos
 // y un callback para saber si se ejecuto bien o no, que recibe dos parametros, uno es para manejar el error
 // el otro es para manejar la respuesta
-mongoose.connect('mongodb://localhost:27017/cafe', (err, res) => {
+mongoose.connect(process.env.URLDB, {
+    useNewUrlParser: true,
+    useCreateIndex: true
+}, (err, res) => {
     if (err) {
         throw err;
     } else {
