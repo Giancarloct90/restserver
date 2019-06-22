@@ -1,0 +1,171 @@
+{
+	"info": {
+		"_postman_id": "91b7fdbb-7e32-4657-b073-305e27daf5ef",
+		"name": "cafe",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "usuario: POST",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "nombre",
+							"value": "jack17",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "jack17@hotmail.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "123546",
+							"type": "text"
+						},
+						{
+							"key": "role",
+							"value": "ADMIN_ROLE",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{url}}/usuario",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"usuario"
+					]
+				},
+				"description": "insertar usuarios"
+			},
+			"response": []
+		},
+		{
+			"name": "Get",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "nombre",
+							"value": "jack16",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "jack16@hotmail.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "123546",
+							"type": "text"
+						},
+						{
+							"key": "role",
+							"value": "ADMIN_ROLE",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{url}}/usuario",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"usuario"
+					]
+				},
+				"description": "Obtenemos todos lo cafe por pagina"
+			},
+			"response": []
+		},
+		{
+			"name": "Usuario: Put",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "nombre",
+							"value": "bwer",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{url}}/usuario/5d0b9feee54c1a193d934622",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"usuario",
+						"5d0b9feee54c1a193d934622"
+					]
+				},
+				"description": "Actualizamos el registro"
+			},
+			"response": []
+		},
+		{
+			"name": "Usuario: Delete",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{url}}/usuario/5d0bb003229d810f905c886f",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"usuario",
+						"5d0bb003229d810f905c886f"
+					]
+				},
+				"description": "esto nos srive para borrar usuario"
+			},
+			"response": []
+		}
+	]
+}
