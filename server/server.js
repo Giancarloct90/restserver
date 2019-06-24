@@ -17,7 +17,20 @@ app.use(bodyParser.json());
 
 // para poder usar los middleware de usuario tenemos que importar o requerir el archivo route.js
 // de esta manera podemos usar los middleware de creamos en el archivo routes.js
-app.use(require('./routes/usuario.js'));
+//app.use(require('./routes/usuario.js'));
+
+// cuando una peticion web llegue a nuestro servidor el archivo que las recibe o maneja es este,
+// con esta linea lo que hacemos es que los middleware que tenemos en el archivo login.js se usen
+// o basicamente puedan usarse desde aqui
+//app.use(require('./routes/login'));
+
+
+// al momento de usar muchas rutas tendriamos que ponerlas aqui mandar hacer el requerimiento aqui,
+// pero cargariamos mucho el archivo server.js y nuestro objetivo es que el archivo server no este muy cargado de informacion
+// lo que estamos haciendo aqui es que creamos un archivo llamado index.js en la raiz de routes, donde estamos haciendo
+// donde estamos haciendo el requerimiento de las rutas de esta manera se tiene un archivo aparte para todos los requerimientos de las rutas en un solo archivo
+// de esta manera el server se mantine mas prolijo
+app.use(require('./routes/index'));
 
 // con este comando estamos conectandonos a mongodb, usando la libreria o paquete previmente desarollado mongoose
 // recibe dos parametro, un string con de donde se encuentra el servidor de db con su puerto y nombre de base de datos
