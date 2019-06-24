@@ -38,9 +38,13 @@ app.post('/login', (req, res) => {
                 }
             });
         }
+        // de esta manera generamos un token, ejecutamos la funcion sign, que recibe 3 parametros
+        // 1 parametro: es la informacion que necesitamos guardar en forma de objeto de js
+        // 2 parametro: es la firma del token para poder saber si el token es valido
+        // 3 parametro: es la la fecha de espiracion y esta en milisegundos, 60*60*24*30 son 30 dias 
         let token = jwt.sign({
             usuario: usuarioDB
-        },'este-es-el-seed-de-mi-aplicacion',{
+        },process.env.SEED,{
             expiresIn: 60*60*24*30
         });
 

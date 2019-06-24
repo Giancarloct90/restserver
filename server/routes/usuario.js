@@ -6,13 +6,19 @@ const bcrypt = require('bcrypt');
 
 const _ = require('underscore')
 
+// de esta manera podremos usar la funciones que existan en el middleware que aqui los requerimos
+const {verificarToken} = require('../middlewares/autentificacion');
+
 // aqui estamos haciendo el require del modelo usuario para poder usar el usario que esportamos en este archivo que aqui indicamos
 // por convencion de sintaxis ponemos la primera letra en mayuscula para indicar que instanciaremos objetos a partir de esta variable
 const Usuario = require('../models/usuario');
 
 // estos son los midleware que estamos usando para que maneje nuestra apliacion
 // las peticiones que manjean nuestra app
-app.get('/usuario', function (req, res) {
+// el segundo parametro es un middleware que creamos,
+// lo que hace este middleware es que desencadena un serie de acciones cuando hacen un peticion, despues de que se ejecuta todo lo que tiene el middleware
+// el control del programa vuelve aqui
+app.get('/usuario', verificarToken ,function (req, res) {
     // en el siguiente codigo estamos obteniendo todos los datos del modelo usuario
     // aqui estamos obteniendo lo valores que el usaurio manda a travez de link para poder establecer un limite y un desde, ejemplo localhos:3000/usuario/?nombre=jack&&limite=44
     let desde = req.query.desde || 0;
