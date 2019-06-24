@@ -4,8 +4,8 @@ heroku account
     Jesucristo1990$
 
 Mongodb Atlas
-    giancarlodp74
-    Jesucristo1990
+    giancarlodp74@gmail.com
+    Jesucristo1990$
     Giancarlo
     Carcamo
     mongo Atlas:

@@ -24,7 +24,7 @@ if (process.env.NODE_ENV === 'dev') {
     urlDB = 'mongodb://localhost:27017/cafe'
 } else {
     // este es el url que obtuvimos de la db creada en mongodb atlas
-    urlDB = 'mongodb+srv://root:4Yodvwi4CvXSTktP@cluster0-8pm3c.mongodb.net/cafe'
+    urlDB = process.env.MONGO_URI;
 }
 
 process.env.URLDB = urlDB;
