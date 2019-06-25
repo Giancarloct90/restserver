@@ -7,7 +7,7 @@ const bcrypt = require('bcrypt');
 const _ = require('underscore')
 
 // de esta manera podremos usar la funciones que existan en el middleware que aqui los requerimos
-const {verificarToken} = require('../middlewares/autentificacion');
+const {verificarToken, verificaAdmin_Role} = require('../middlewares/autentificacion');
 
 // aqui estamos haciendo el require del modelo usuario para poder usar el usario que esportamos en este archivo que aqui indicamos
 // por convencion de sintaxis ponemos la primera letra en mayuscula para indicar que instanciaremos objetos a partir de esta variable
@@ -18,7 +18,12 @@ const Usuario = require('../models/usuario');
 // el segundo parametro es un middleware que creamos,
 // lo que hace este middleware es que desencadena un serie de acciones cuando hacen un peticion, despues de que se ejecuta todo lo que tiene el middleware
 // el control del programa vuelve aqui
-app.get('/usuario', verificarToken ,function (req, res) {
+app.get('/usuario', verificarToken , (req, res)=> {
+
+    return res.json({
+        usuario: req.usuario
+    });
+
     // en el siguiente codigo estamos obteniendo todos los datos del modelo usuario
     // aqui estamos obteniendo lo valores que el usaurio manda a travez de link para poder establecer un limite y un desde, ejemplo localhos:3000/usuario/?nombre=jack&&limite=44
     let desde = req.query.desde || 0;
@@ -51,7 +56,7 @@ app.get('/usuario', verificarToken ,function (req, res) {
     });
 })
 
-app.post('/usuario', function (req, res) {
+app.post('/usuario', [verificarToken, verificaAdmin_Role] ,(req, res) => {
     //esta es la variable body que es resultado del bodyparser
     // con este bodyparser lo que obtenemos son los valores del form de donde nos esten mandando la peticion
     //  ejemplo mandan una peticion con un form lleno de datos con el body parser estamo obteniendo esos datos de ese form
@@ -103,7 +108,7 @@ app.post('/usuario', function (req, res) {
 })
 
 // es una actulizacion de registro, obtendremo el id de un registro y si existe lo actualizamos
-app.put('/usuario/:id', function (req, res) {
+app.put('/usuario/:id', verificarToken , (req, res)=> {
     // de esta manera obtenemos el id que viene en el link 
     let id = req.params.id;
     // con este comando obtenemos todo el form que nos envian
@@ -163,7 +168,7 @@ app.put('/usuario/:id', function (req, res) {
 //     });
 // })
 
-app.delete('/usuario/:id', (req, res) => {
+app.delete('/usuario/:id', verificarToken ,(req, res) => {
     let id = req.params.id;
 
     Usuario.findByIdAndUpdate(id, {

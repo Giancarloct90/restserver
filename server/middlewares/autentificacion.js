@@ -1,8 +1,8 @@
 const jwt = require('jsonwebtoken');
 
-//==============
+//====================
 // let verifica token
-//==============
+//====================
 
 // este es un middleware, que basicamente lo que hace es verificar la firma de nuestro token
 // verificarToken es una funcion que recibe 3 parametros req y res, son parametros que vienen de la funccion get
@@ -18,7 +18,9 @@ let verificarToken = (req, res, next) => {
         if (err) {
             return res.status(401).json({
                 ok: false,
-                err
+                err:{
+                    message: 'Token no valido'
+                }
             });
         }
         // en este punto no existe ningun error y aqui proseguimos, en el req.usuario le asignamos el usuario o el payload del token
@@ -31,6 +33,35 @@ let verificarToken = (req, res, next) => {
     // });
 };
 
+
+//====================
+// verifica adminrole
+//====================
+
+// el onjetivo de esta funcion es verificar de que tipo de role tiene la persona que se loguio para ver si tiene permisos de insertar usuarios
+// obtenemos la informacion del usuario en la funcion verificarToken, luego le ponemos una condicion para ver si es admin o user normal
+// solo los admin podran insertar en la bd
+let verificaAdmin_Role = (req, res, next)=>{
+    let usuario = req.usuario;
+    
+    if(usuario.role === 'USER_ROLE'){
+        return res.json({
+            ok: false,
+            err: {
+                message: 'El usuario no es Admin'
+            }
+        });
+    }
+    res.json({
+        ok:true,
+        msj: {
+            message: 'este chavalo si puede insertar usuario en la db'
+        }
+    })
+};
+
+
 module.exports = {
-    verificarToken
+    verificarToken,
+    verificaAdmin_Role
 }
