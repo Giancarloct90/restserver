@@ -54,7 +54,7 @@ app.get('/usuario', verificarToken, (req, res) => {
         });
     });
 })
-// 
+// ,[verificarToken, verificaAdmin_Role]
 app.post('/usuario',[verificarToken, verificaAdmin_Role], (req, res) => {
     //esta es la variable body que es resultado del bodyparser
     // con este bodyparser lo que obtenemos son los valores del form de donde nos esten mandando la peticion
