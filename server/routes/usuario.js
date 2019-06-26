@@ -23,12 +23,6 @@ const Usuario = require('../models/usuario');
 // el control del programa vuelve aqui
 app.get('/usuario', verificarToken, (req, res) => {
 
-
-    return res.json({
-        // con este codigo estamos obteniendo el el payload del token que nos estan enviando que en este caso contiene el usuario que metimos la vez pasada
-        usuario: req.usuario
-    });
-
     // en el siguiente codigo estamos obteniendo todos los datos del modelo usuario
     // aqui estamos obteniendo lo valores que el usaurio manda a travez de link para poder establecer un limite y un desde, ejemplo localhos:3000/usuario/?nombre=jack&&limite=44
     let desde = req.query.desde || 0;
