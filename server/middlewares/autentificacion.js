@@ -52,12 +52,12 @@ let verificaAdmin_Role = (req, res, next)=>{
             }
         });
     }
-    res.json({
-        ok:true,
-        msj: {
-            message: 'este chavalo si puede insertar usuario en la db'
-        }
-    })
+ //   res.json({
+ //       ok:true,
+ //       msj: {
+ //          message: 'este chavalo si puede insertar usuario en la db'
+ //       }
+ //  })
     next();
 };
 
