@@ -51,3 +51,14 @@ empezamos a usar mongodb compass para poder conectarnos a mongodb atlas
 lo abrimos y nos conectamos localmente solo poniendo el comando localhost,
 luego nos conectamos al servidor de mlab, usuamos su url y username and password que habia ahi,
 con el npm update, se actulizan todos lo paquetes de npm hasta la ultima version.
+
+link de nuestra app
+https://restserver-gian.herokuapp.com
+
+
+Google API
+    client id
+    192797068814-imaprmqvr69qt5hhjihl9s9a8d1bbh2h.apps.googleusercontent.com
+
+    secret id
+    RbfROyDIVa_YTlUOtUlON-hv
