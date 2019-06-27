@@ -4,7 +4,7 @@ const express = require('express')
 const mongoose = require('mongoose');
 const app = express()
 const bodyParser = require('body-parser');
-
+const path = require('path');
 
 
 // parser application/x-www-form-urlencoded
@@ -14,6 +14,10 @@ app.use(bodyParser.urlencoded({
     extended: false
 }));
 app.use(bodyParser.json());
+
+
+// esta es la manera correcta de hacer publico los archivos html o nuestra pagina web para que los que visiten nuestro servidor, los puedan ver
+app.use(express.static(path.resolve(__dirname,'../public')));
 
 // para poder usar los middleware de usuario tenemos que importar o requerir el archivo route.js
 // de esta manera podemos usar los middleware de creamos en el archivo routes.js

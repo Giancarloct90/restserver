@@ -56,6 +56,9 @@ link de nuestra app
 https://restserver-gian.herokuapp.com
 
 
+27.06.19
+Estamos usando los api de google, creamos el y obtemos los siguientes datos despues de crear el google signin
+
 Google API
     client id
     192797068814-imaprmqvr69qt5hhjihl9s9a8d1bbh2h.apps.googleusercontent.com

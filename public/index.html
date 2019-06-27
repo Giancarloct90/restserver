@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+
+    <!-- con este codigo estamos implementando el api de google para poder usarlo, en la segundo linea tenemos que poner el client id que nos proporciono
+    cuando creamos el API de google
+    -->>
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <meta name="google-signin-client_id" content="192797068814-48nal9pou1fp89ooadntp8ha6jor0qer.apps.googleusercontent.com">
+                                                 
+
+</head>
+<body>
+    <!-- con este codigo estamos implementando los botones para poder usar el sign de google con funciones de js para que desencadene el funcionamiento de google-->
+    <div class="g-signin2" data-onsuccess="onSignIn"></div>
+
+    <!-- este es el sign out-->
+    <a href="#" onclick="signOut();">Sign out</a>
+    <script>
+        function signOut() {
+            var auth2 = gapi.auth2.getAuthInstance();
+            auth2.signOut().then(function () {
+            console.log('User signed out.');
+            });
+        }
+    </script>
+
+
+
+    <script>
+    //con esta funcion se esta imprimiendo en pantalla los resultados obtenidos en google sign in
+    function onSignIn(googleUser) {
+        var profile = googleUser.getBasicProfile();
+        console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+        console.log('Name: ' + profile.getName());
+        console.log('Image URL: ' + profile.getImageUrl());
+        console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+    }
+    </script>
+</body>
+</html>
