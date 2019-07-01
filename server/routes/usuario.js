@@ -4,6 +4,8 @@ const app = express();
 //aqui lo que estamos haciendo es mandar a llamar el paquete para poderlo usar
 const bcrypt = require('bcrypt');
 
+// aqui estamos requiriendo el paquete o libreria de underscore, 
+// underscore es un alibreria de js, que aniade mejoras al js, mas funciones y hace a js mas potente
 const _ = require('underscore')
 
 // de esta manera podremos usar la funciones que existan en el middleware que aqui los requerimos
@@ -112,7 +114,7 @@ app.put('/usuario/:id', [verificarToken, verificaAdmin_Role], (req, res) => {
     let id = req.params.id;
     // con este comando obtenemos todo el form que nos envian
 
-    // underscore es un alibreria que expande las funciones de js, con esta funcion devuelve el objeto solo con los objeto que queremos ver, solo con los objetos que necesitamos
+    // underscore es una libreria que expande las funciones de js, con esta funcion devuelve el objeto solo con los objeto que queremos ver, solo con los objetos que necesitamos
     let body = _.pick(req.body, ['nombre', 'email', 'img', 'role', 'estado']);
     // usamos un metodo de nuestro modelo previamnete creado, que se llama findOneAndUpdate, que recibe 4 parametros en este caso
     // el primer parametro es el id, que lo va a buscar en la base de datos y si existe vaa seguir con la modificacion,
@@ -127,7 +129,6 @@ app.put('/usuario/:id', [verificarToken, verificaAdmin_Role], (req, res) => {
         if (err) {
             return res.status(400).json({
                 ok: false,
-
             });
         }
         res.json({
