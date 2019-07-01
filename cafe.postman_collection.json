@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "91b7fdbb-7e32-4657-b073-305e27daf5ef",
+		"_postman_id": "dff9bc9a-db46-464b-b055-540e011e2279",
 		"name": "cafe",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -211,7 +211,7 @@
 					"urlencoded": [
 						{
 							"key": "email",
-							"value": "gian1@hotmail.com",
+							"value": "gian@hotmail.com",
 							"type": "text"
 						},
 						{
@@ -231,6 +231,184 @@
 					]
 				},
 				"description": "Este es el login de usuario"
+			},
+			"response": []
+		},
+		{
+			"name": "Usuario: Login Google ",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "1cf132d8-aaf7-440a-a4c3-4e086d7c2925",
+						"exec": [
+							"",
+							"let resp = pm.response.json();",
+							"",
+							"if(resp.ok){",
+							"    let token = resp.token;",
+							"    pm.environment.set(\"token\", token);",
+							"    console.log('se actualizo el token');",
+							"    ",
+							"}else {",
+							"    console.log('no se actualizo el token');",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "idtoken",
+							"value": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjExOGRmMjU0YjgzNzE4OWQxYmMyYmU5NjUwYTgyMTEyYzAwZGY1YTQiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJhY2NvdW50cy5nb29nbGUuY29tIiwiYXpwIjoiMTkyNzk3MDY4ODE0LTQ4bmFsOXBvdTFmcDg5b29hZG50cDhoYTZqb3IwcWVyLmFwcHMuZ29vZ2xldXNlcmNvbnRlbnQuY29tIiwiYXVkIjoiMTkyNzk3MDY4ODE0LTQ4bmFsOXBvdTFmcDg5b29hZG50cDhoYTZqb3IwcWVyLmFwcHMuZ29vZ2xldXNlcmNvbnRlbnQuY29tIiwic3ViIjoiMTAzNDMwNDg5NjQ5Mzk3Mjk3MjU1IiwiZW1haWwiOiJnaWFuY2FybG9kcDc0QGdtYWlsLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJhdF9oYXNoIjoiMERxb2o0WnNac0JGZDRVNE1xQzZ2dyIsIm5hbWUiOiJHaWFuY2FybG8gQ2FyY2FtbyIsInBpY3R1cmUiOiJodHRwczovL2xoNi5nb29nbGV1c2VyY29udGVudC5jb20vLWVkNVRnVWRwZ1hvL0FBQUFBQUFBQUFJL0FBQUFBQUFBQUFBL0FDSGkzcmRkakF0dVA3S2h1dVo3OUwzRkZ6N0FsR0piTVEvczk2LWMvcGhvdG8uanBnIiwiZ2l2ZW5fbmFtZSI6IkdpYW5jYXJsbyIsImZhbWlseV9uYW1lIjoiQ2FyY2FtbyIsImxvY2FsZSI6ImVzIiwiaWF0IjoxNTYxODYyNjIxLCJleHAiOjE1NjE4NjYyMjEsImp0aSI6ImJlNjYxOWRhYzA2NmU5MjU3Njg5YTk4NzZlMzY0NjAwM2Y4MzU1ZjEifQ.VLfBmtTjXQPX3ReUiB9AUrtz9ITmXr5iRLmLhcru6m-iqE5r902qNMBFxbpTyU1iiSx-elD-hFJ56AST7IdfuVxENaDP08dR1pArxdx1RjSTehhpla6mOJzmZgo_Pg4Zf_6bLGzJJEIpAeSnrMBgWwxk6gQUSLJfnXHPkz-IA7LRGmizk96k2Q4pmkb1Yf40WqJkx6RIFWiG8P7F3P9_-Y0EHvHHw1PLm9bfPX_DhlIA7gMKZaWNP9RcoBECi7unVhHj7ZbJYkaHkoat4GTqPlS8m-0vIr-wyZj0oXE9CRJDX_PV4wQPv8Zeikpk9Er5BYo1lAhH3wi3bLT7qn1hXQ",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{url}}/google",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"google"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Categoria: Post o Insert",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "{{token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "descripcion",
+							"value": "Bebidas Heladas",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{url}}/categoria",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"categoria"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Categoria: Put o Actualizar",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "token",
+						"value": "{{token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "descripcion",
+							"value": "",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{url}}/categoria/5d197f1ad5c5cb1696b7656f",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"categoria",
+						"5d197f1ad5c5cb1696b7656f"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Categoria: Delete o Borrar",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "token",
+						"value": "{{token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{url}}/categoria/5d197f1ad5c5cb1696b7656f",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"categoria",
+						"5d197f1ad5c5cb1696b7656f"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Categoria: Get o Obtener Cat",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "token",
+						"value": "{{token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{url}}/categoria",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"categoria"
+					]
+				}
 			},
 			"response": []
 		}
