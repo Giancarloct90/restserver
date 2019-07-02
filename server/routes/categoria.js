@@ -19,7 +19,10 @@ app.get('/categoria', [verificarToken], (req, res) => {
     // 1 parametro: es el nombre de la coleecion de la cual necesitamos inportar los datos
     // 2 parametro: son las propiedades, que queremos que se muestren
     // con la funcion sort, ordenamos la coleccion con la descripcion
-    Categoria.find({}).sort('descripcion').populate('usuario', 'nombre email').exec((err, categorias) => {
+    Categoria.find({})
+    .sort('descripcion')
+    .populate('usuario', 'nombre email')
+    .exec((err, categorias) => {
         if (err) {
             return res.status(400).json({
                 ok: false,
