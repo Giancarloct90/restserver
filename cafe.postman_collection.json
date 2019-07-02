@@ -306,7 +306,7 @@
 					"urlencoded": [
 						{
 							"key": "descripcion",
-							"value": "Bebidas Heladas",
+							"value": "Jugos Naturales",
 							"type": "text"
 						}
 					]
@@ -387,6 +387,48 @@
 		},
 		{
 			"name": "Categoria: Get o Obtener Cat",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "token",
+						"value": "{{token}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "descripcion",
+							"value": "cocteles",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{url}}/categoria",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"categoria"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Categoria: Get with id",
 			"request": {
 				"method": "GET",
 				"header": [
@@ -401,12 +443,13 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "{{url}}/categoria",
+					"raw": "{{url}}/categoria/5d197f34d5c5cb1696b76570",
 					"host": [
 						"{{url}}"
 					],
 					"path": [
-						"categoria"
+						"categoria",
+						"5d197f34d5c5cb1696b76570"
 					]
 				}
 			},
