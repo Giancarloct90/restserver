@@ -306,7 +306,7 @@
 					"urlencoded": [
 						{
 							"key": "descripcion",
-							"value": "Jugos Naturales",
+							"value": "Ensaladas",
 							"type": "text"
 						}
 					]
@@ -450,6 +450,188 @@
 					"path": [
 						"categoria",
 						"5d197f34d5c5cb1696b76570"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Producto: Post o Insert",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "{{token}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "nombre",
+							"value": "Ensalada de Atun",
+							"type": "text"
+						},
+						{
+							"key": "precioun",
+							"value": "10",
+							"type": "text"
+						},
+						{
+							"key": "descripcion",
+							"value": "ja",
+							"type": "text"
+						},
+						{
+							"key": "disponible",
+							"value": "true",
+							"type": "text"
+						},
+						{
+							"key": "categoria",
+							"value": "5d1c13c961f8300bce82d0ce",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{url}}/producto",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"producto"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Producto: Get o Obtener Productos",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "token",
+						"value": "{{token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{url}}/producto",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"producto"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Producto: Update o Actulizar",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "token",
+						"value": "{{token}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "nombre",
+							"value": "Ensalda de Hongos",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{url}}/producto/5d1c14f261f8300bce82d0d1",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"producto",
+						"5d1c14f261f8300bce82d0d1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Producto: Delete o Borrar producto",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "token",
+						"value": "{{token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{url}}/producto/5d1c18b661f8300bce82d0d2",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"producto",
+						"5d1c18b661f8300bce82d0d2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Productos: Get With id",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "token",
+						"value": "{{token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{url}}/producto/5d1c144b61f8300bce82d0cf",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"producto",
+						"5d1c144b61f8300bce82d0cf"
 					]
 				}
 			},
