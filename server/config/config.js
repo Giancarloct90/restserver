@@ -34,6 +34,7 @@ process.env.URLDB = urlDB;
 // ==========================
 // Fecha de vencimiento
 //===========================
+// este es el timepo de caducidad de nuestros token, en esta ocacion le pusimos 48h
 process.env.CADUCIDAD_TOKEN = '48h';
 
 
@@ -47,5 +48,5 @@ process.env.SEED = process.env.SEED || 'este-es-el-seed-produccion';
 // ==========================
 // Google Client ID
 //===========================
-
+// este es el cliente id de nos proporciona google para poder usar su API de GoogleSignIn
 process.env.CLIENT_ID = process.env.CLIENT_ID || '192797068814-48nal9pou1fp89ooadntp8ha6jor0qer.apps.googleusercontent.com';

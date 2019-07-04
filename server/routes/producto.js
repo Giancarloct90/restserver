@@ -5,6 +5,35 @@ const {
 } = require('../middlewares/autentificacion');
 const Producto = require('../models/productos');
 
+
+//==========================
+// Buscar Productos
+//==========================
+app.get('/producto/buscar/:termino', verificarToken, (req, res) => {
+    let termino = req.params.termino;
+    // usaremos una expresion regular, creamos una expresion regular con la funcion
+    // RegExp que en este caso recibe 2 parametros, 
+    //1 parametros: es la string con la cual queremos hacer la expresion regular
+    //2 parametros: con la i le estamos diciendo que sea insensible a las mayusculas o minusculas
+    let regex = new RegExp(termino, 'i');
+    Producto.find({
+            nombre: regex
+        }).populate('categoria', 'nombre')
+        .exec((err, productoDB) => {
+            if (err) {
+                return res.status().json({
+                    ok: false,
+                    err
+                });
+            }
+            res.json({
+                ok: true,
+                productoDB
+            });
+        });
+});
+
+
 //==========================
 // Obtener productos
 //==========================

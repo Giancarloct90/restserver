@@ -20,23 +20,23 @@ app.get('/categoria', [verificarToken], (req, res) => {
     // 2 parametro: son las propiedades, que queremos que se muestren
     // con la funcion sort, ordenamos la coleccion con la descripcion
     Categoria.find({})
-    .sort('descripcion')
-    .populate('usuario', 'nombre email')
-    .exec((err, categorias) => {
-        if (err) {
-            return res.status(400).json({
-                ok: false,
-                err
-            });
-        }
-        Categoria.countDocuments({}, (err, conteo) => {
-            res.json({
-                ok: true,
-                categorias,
-                conteo
+        .sort('descripcion')
+        .populate('usuario', 'nombre email')
+        .exec((err, categorias) => {
+            if (err) {
+                return res.status(400).json({
+                    ok: false,
+                    err
+                });
+            }
+            Categoria.countDocuments({}, (err, conteo) => {
+                res.json({
+                    ok: true,
+                    categorias,
+                    conteo
+                });
             });
         });
-    });
 });
 
 

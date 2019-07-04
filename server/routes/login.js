@@ -36,6 +36,7 @@ app.post('/login', (req, res) => {
                 }
             });
         }
+        // en esta parte estamos comparando la clave, usamos el bcrypt,
         if (!bcrypt.compareSync(body.password, usuarioDB.password)) {
             return res.status(400).json({
                 ok: false,
@@ -47,11 +48,11 @@ app.post('/login', (req, res) => {
         // de esta manera generamos un token, ejecutamos la funcion sign, que recibe 3 parametros
         // 1 parametro: es la informacion que necesitamos guardar en forma de objeto de js
         // 2 parametro: es la firma del token para poder saber si el token es valido
-        // 3 parametro: es la la fecha de espiracion y esta en milisegundos, 60*60*24*30 son 30 dias 
+        // 3 parametro: es una varible que tenemos nosotros en nuestro archivo de config, la cual la definimos con 48h
         let token = jwt.sign({
             usuario: usuarioDB
         }, process.env.SEED, {
-            expiresIn: 60 * 60 * 24 * 30
+            expiresIn: process.env.CADUCIDAD_TOKEN
         });
 
         res.json({
@@ -79,9 +80,9 @@ async function verify(token) {
     });
     const payload = ticket.getPayload();
     const userid = payload['sub'];
-    console.log(payload.name);
-    console.log(payload.email);
-    console.log(payload.picture);
+    // console.log(payload.name);
+    // console.log(payload.email);
+    // console.log(payload.picture);
     return {
         nombre: payload.name,
         email: payload.email,
@@ -96,7 +97,7 @@ app.post('/google', async (req, res) => {
     // obtenemos el token de req.body y se lo enviamos al funcion verify previamnete creada por los chicos de google, la cual recibe como parametro
     // el token que recibimos del frontend 
     let token = req.body.idtoken;
-
+    // aqui estamos recibiendo lo que devuelve la promesa verify, lo que devuelve la promesa verify es un objeto con el payload, con la informacion del usuario
     let googleUser = await verify(token).catch((e) => {
         return res.status(403).json({
             ok: false,
