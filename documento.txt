@@ -65,3 +65,11 @@ Google API
 
     secret id
     RbfROyDIVa_YTlUOtUlON-hv
+
+06.07.19
+empezamos a subir archivos al servidor, requerimos el paquete express-fileupload, los archivos que subimos primero
+se almacenan en la varible req.file
+.split no sirve para cortar un string y almacenarlo en forma de arreglos y se cortar con el signo que nosotros le indiquemos
+.indexOf busca en el arrrelgo lo que le enviemos por parametro a esta funcion devuelve uno cuando encuentra algo que coincida con lo que se esta buscando
+.join uno un arreglo en string, lo une con el signo que le estemos enviando a esta funcion como parametro
+con la funcion mv lo estamos guardando.

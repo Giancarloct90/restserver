@@ -23,7 +23,7 @@ const Usuario = require('../models/usuario');
 // el segundo parametro es un middleware que creamos,
 // lo que hace este middleware es que desencadena un serie de acciones cuando hacen un peticion, despues de que se ejecuta todo lo que tiene el middleware
 // el control del programa vuelve aqui
-app.get('/usuario', verificarToken, (req, res) => {
+app.get('/usuario', (req, res) => {
 
     // en el siguiente codigo estamos obteniendo todos los datos del modelo usuario
     // aqui estamos obteniendo lo valores que el usaurio manda a travez de link para poder establecer un limite y un desde, ejemplo localhos:3000/usuario/?nombre=jack&&limite=44
