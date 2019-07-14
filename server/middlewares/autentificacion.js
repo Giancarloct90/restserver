@@ -18,7 +18,7 @@ let verificarToken = (req, res, next) => {
         if (err) {
             return res.status(401).json({
                 ok: false,
-                err:{
+                err: {
                     message: 'Token no valido'
                 }
             });
@@ -41,10 +41,10 @@ let verificarToken = (req, res, next) => {
 // el onjetivo de esta funcion es verificar de que tipo de role tiene la persona que se loguio para ver si tiene permisos de insertar usuarios
 // obtenemos la informacion del usuario en la funcion verificarToken, luego le ponemos una condicion para ver si es admin o user normal
 // solo los admin podran insertar en la bd
-let verificaAdmin_Role = (req, res, next)=>{
+let verificaAdmin_Role = (req, res, next) => {
     let usuario = req.usuario;
-    
-    if(usuario.role === 'USER_ROLE'){
+
+    if (usuario.role === 'USER_ROLE') {
         return res.json({
             ok: false,
             err: {
@@ -52,17 +52,48 @@ let verificaAdmin_Role = (req, res, next)=>{
             }
         });
     }
- //   res.json({
- //       ok:true,
- //       msj: {
- //          message: 'este chavalo si puede insertar usuario en la db'
- //       }
- //  })
+    //   res.json({
+    //       ok:true,
+    //       msj: {
+    //          message: 'este chavalo si puede insertar usuario en la db'
+    //       }
+    //  })
     next();
 };
 
 
+
+//==========================
+// Verifica Token para imagen
+//==========================
+// con esta funcion lo que estamos haciendo es verificando el token que viene a travez de url
+let verificaTokenImg = (req, res, next) => {
+
+    // obtenemos el valor del token que viene en una variable en el url, y lo almacenamos en la variable token
+    let token = req.query.token;
+    // aqui estamos usando la libreria jwt.
+    // para poder verificarlo usamos la variable verify, que viene en el paquete de jwt, recibe 3 parmetros
+    // 1 parametro, el token que obtuvimos del url, el cual contiene toda la informacion
+    // 2 parametro, es el seed o firma con el cual fue creado el token, en este caso se necesita para poder compararlo con el que trae el token que obtuvimos  en el url
+    // 3 parametro es un callback con el cual manejamos el resultado que nos arroja esta funcion. ya sea un error o un decoed que contiene el payload del token,
+    // en este caso el payload contiene informacion de usuario
+    jwt.verify(token, process.env.SEED, (err, decoded) => {
+        if (err) {
+            return res.status(400).json({
+                ok: false,
+                err: {
+                    message: 'Token no es valido'
+                }
+            });
+        }
+        req.usuario = decoded.usuario;
+        next();
+    });
+
+};
+
 module.exports = {
+    verificaTokenImg,
     verificarToken,
     verificaAdmin_Role
 }

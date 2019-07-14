@@ -2,6 +2,7 @@ const express = require('express');
 const fileUpload = require('express-fileupload');
 const app = express();
 const Usuario = require('../models/usuario')
+const Producto = require('../models/productos');
 // filesystem nos sirve para poder manipular archivos del sistema
 const fs = require('fs');
 // con esta libreria nos sirve para poder crear un path, para poder crear un path y poder manipular los archivos de una forma mas facil
@@ -31,6 +32,7 @@ app.put('/upload/:tipo/:id', (req, res) => {
     // Validar tipos
     // estamos veirfianco que los tipos sean validos
     let tiposValidos = ['productos', 'usuarios'];
+    // con un indexOf recorremos el arreglo en busqueda de algo parecido al parametro que le estamos pasando
     if (tiposValidos.indexOf(tipo) < 0) {
         return res.status(400).json({
             ok: false,
@@ -84,8 +86,14 @@ app.put('/upload/:tipo/:id', (req, res) => {
         }
 
         // aqui la imagen ya se cargo, 
+        // aqui vamos a elegir si actulizamos la coleccionde usuario o productos
+        if (tipo === 'usuarios') {
+            imagenUsuario(id, res, nombreArchivoFinal);
+        } else {
+            imagenProducto(id, res, nombreArchivoFinal);
+        }
 
-        imagenUsuario(id, res, nombreArchivoFinal);
+
     });
 });
 
@@ -100,6 +108,11 @@ function borrarArchivo(nombreImagen, tipo) {
     if (fs.existsSync(pathImagen)) {
         // si existe la iamgen la borramos con la funcion unlickSync con la que deice Sync para poderlo hacer de manera asincrona
         fs.unlinkSync(pathImagen);
+    } else {
+        console.log('No se borro ninguna img');
+        console.log(tipo);
+        console.log(nombreImagen);
+
     }
 }
 
@@ -138,10 +151,51 @@ function imagenUsuario(id, res, nombreArchivoFinal) {
         // luego simplemente se actuliza la coleccion con el nombre de la nueva imagen
         borrarArchivo(usuarioDB.img, 'usuarios');
         usuarioDB.img = nombreArchivoFinal;
-        usuarioDB.save((err, usuarioDB) => {
+        usuarioDB.save((err, usuarioActulizado) => {
             res.json({
                 ok: true,
-                usuario: usuarioDB,
+                usuario: usuarioActulizado,
+                img: nombreArchivoFinal
+            });
+        });
+    });
+}
+
+
+// con la funcion producto imagenProducto lo que hacemos es actulizar la imagen de nuestra coleccion de productos con una nueva imagen, esta funcion recibe 3 parametros
+// 1 parametro es el id con el cual vamos a buscar en nuestra coleccion
+// 2 parametro es el objeto de tipo res, si nostros estamos usando este objeto en esta funcion es como que si lo usaramos en donde fue llamada la funcion
+// es el nombre del archivo que se acaba de guardar en el fileSystem
+// primero instanciamos un objeto de tipo producto con el cual buscamos un usuario por el id que recibimos, y la respuesta de esta busqueda la manejamos con un callback
+// luego revisamos si el usuario existe, si existe borramos la imagen que tiene y actulizamos la coleccion y la borramos del filesystem
+function imagenProducto(id, res, nombreArchivoFinal) {
+    Producto.findById(id, (err, productoDB) => {
+        if (err) {
+            borrarArchivo(nombreArchivoFinal, 'productos');
+            res.status(500).json({
+                ok: false,
+                err: {
+                    message: 'Error en el servidor'
+                }
+            });
+        }
+        if (!productoDB) {
+            borrarArchivo(nombreArchivoFinal, 'productos');
+            res.status(400).json({
+                ok: false,
+                err: {
+                    message: 'El id de producto no existe'
+                }
+            });
+        }
+
+        borrarArchivo(productoDB.img, 'productos');
+        productoDB.img = nombreArchivoFinal;
+
+        productoDB.save((err, productoDB) => {
+            res.status(200).json({
+                ok: true,
+                producto: productoDB,
                 img: nombreArchivoFinal
             });
         });
